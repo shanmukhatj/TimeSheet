@@ -1,18 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!--
-        Code Citations:
-          1. Based on design elements from:
-             a. Django-Tutorial (MIT License) from https://github.com/saurav0001kumar/Django-Tutorial
-             b. Miniproject customer.html
-             c. Busservice reset-password.ejs (MIT License) from https://github.com/jessanKhan/busservice
-             d. Blade template design from https://github.com/Ziadch1/pfe-v1
-             e. Procedimentos.html design from https://github.com/lucaspierry03/agendamentoConsultas_js
-    -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customer Form</title>
+    <title>Net 9</title>
     <style>
         :root{
             --nav-height: 64px;
@@ -88,52 +79,83 @@
         .btn-home:hover{ transform: translateY(-2px); box-shadow: 0 8px 18px rgba(0,0,0,0.25); }
 
         .container {
-            border-radius: 8px;
-            background: linear-gradient(to bottom, #0c0c0c 60%, #1a1a1a 70%, transparent 100%),
-                        linear-gradient(to right, rgb(135, 89, 4) 30%, rgb(3, 96, 127) 60%);
-            background-size: 100% 100%, 100% 100%;
-            background-position: 0 0, bottom;
-            background-repeat: no-repeat;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 8rem;
-            max-width: 1100px; /* keep content aligned with navbar */
-            margin: 2rem; /* small breathing room */
+            border-radius: 12px;
+            background: rgba(0,0,0,0.45);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+            padding: 2.25rem;
+            max-width: 960px; /* keep content aligned with navbar */
+            margin: 1.25rem;
+            width: calc(100% - 2.5rem);
         }
+
         h1 {
             text-align: center;
-            color: #d3d1d1;
+            color: #f5f5f5;
+            margin: 0 0 0.75rem 0;
+            font-size: 1.6rem;
         }
+
         form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem 1rem;
+            align-items: start;
+        }
+
+        label {
+            display: block;
+            font-size: 0.95rem;
+            color: #dcdcdc;
+            margin-bottom: 0.25rem;
+        }
+
+        .field {
             display: flex;
             flex-direction: column;
-          
         }
-        label {
-            margin-top: 10px;
-            color: #c3bebe;
+
+        input[type="text"], input[type="date"], input[type="number"], textarea {
+            padding: 0.6rem 0.75rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(255,255,255,0.06);
+            color: #fff;
+            font-size: 0.95rem;
+            outline: none;
+            width: 100%;
+            box-sizing: border-box;
         }
-        input {
-            padding: 8px;
-            margin-top: 5px;
-            background-color: #d2cdcd;
-            border: 1px solid #25252a; 
-            border-radius: 4px;
+
+        input:focus, textarea:focus {
+            border-color: var(--accent);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.45), 0 0 0 4px rgba(0,212,214,0.06);
         }
+
         button { 
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #cecece;
-            color: rgb(0, 0, 0);
+            grid-column: 1 / -1;
+            padding: 0.85rem 1rem;
+            background: linear-gradient(90deg,var(--accent), #6be7e9);
+            color: #052525;
             border: none;
-            border-radius: 4px;
+            border-radius: 10px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 1rem;
+            font-weight: 700;
+            box-shadow: 0 8px 22px rgba(0,0,0,0.35);
+            transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease;
         }
-        button:hover {
-            background-color: #d3a062;
+
+        button:hover { transform: translateY(-3px); opacity: 0.98 }
+
+        @media (max-width:900px){
+            form{ grid-template-columns: 1fr; }
+            .container{ padding: 1.25rem; margin: 1rem }
         }
-        input:hover {
-            background-color: #b8bcc4;
+
+        @media (max-width:420px){
+            body{ padding-top: calc(var(--nav-height) + 6px) }
+            h1{ font-size: 1.25rem }
+            .nav-logo span{ display:none }
         }
     </style>
 </head>
