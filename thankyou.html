@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You</title>
+    <style>
+        :root{
+            --nav-height: 64px;
+            --nav-bg: rgba(0,0,0,0.35);
+            --accent: #00d4d6;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #075d5f, #582664);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            color: #fff;
+            padding-top: var(--nav-height); /* leave space for fixed navbar */
+            box-sizing: border-box;
+        }
+
+        /* Navigation bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: var(--nav-height);
+            background: var(--nav-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            backdrop-filter: blur(6px);
+        }
+
+        .nav-container {
+            width: 100%;
+            max-width: 1100px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 1rem;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .nav-logo svg { width: 36px; height: 36px; display: block; }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-home {
+            background: linear-gradient(90deg,var(--accent),#6be7e9);
+            color: #052525;
+            padding: 0.5rem 0.9rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: transform .12s ease, box-shadow .12s ease;
+        }
+
+        .btn-home:hover{ transform: translateY(-2px); box-shadow: 0 8px 18px rgba(0,0,0,0.25); }
+
+        .card {
+            background: rgba(0,0,0,0.5);
+            padding: 3rem 4rem;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+        }
+
+        h1 { margin: 0; font-size: 48px; }
+        p { margin-top: 12px; color: #e6e6e6; }
+
+        /* Responsive tweaks */
+        @media (max-width:600px){
+            .card{ padding: 2rem 1.25rem; width: calc(100% - 2rem); }
+            h1{ font-size: 32px }
+            .nav-logo span{ display:none }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation bar: replace the inline SVG with an <img> if you prefer a raster logo. -->
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <a class="nav-logo" href="index.html" aria-label="Brand logo">
+                <!-- Inline SVG logo - swap with <img src="/path/to/logo.png"> to use an image file -->
+                <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                    <defs>
+                        <linearGradient id="g" x1="0" x2="1">
+                            <stop offset="0" stop-color="#00d4d6"/>
+                            <stop offset="1" stop-color="#6be7e9"/>
+                        </linearGradient>
+                    </defs>
+                    <rect width="64" height="64" rx="12" fill="url(#g)" />
+                    <path d="M20 40 L32 22 L44 40 Z" fill="#052525" opacity="0.95"/>
+                </svg>
+                <span>Net 9</span>
+            </a>
+
+            <div class="nav-actions">
+                <a class="btn-home" href="index.html" role="button" aria-label="Go to Home">Home</a>
+            </div>
+        </div>
+    </nav>
+    <div class="card">
+        <h1>Thankyou</h1>
+        <p>Your submission has been received.</p>
+    </div>
+</body>
+</html>
+

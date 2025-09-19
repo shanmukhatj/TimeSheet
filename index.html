@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--
+        Code Citations:
+          1. Based on design elements from:
+             a. Django-Tutorial (MIT License) from https://github.com/saurav0001kumar/Django-Tutorial
+             b. Miniproject customer.html
+             c. Busservice reset-password.ejs (MIT License) from https://github.com/jessanKhan/busservice
+             d. Blade template design from https://github.com/Ziadch1/pfe-v1
+             e. Procedimentos.html design from https://github.com/lucaspierry03/agendamentoConsultas_js
+    -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Form</title>
+    <style>
+        :root{
+            --nav-height: 64px;
+            --nav-bg: rgba(0,0,0,0.35);
+            --accent: #00d4d6;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #582664, #075d5f);
+            margin: 0; /* reset so navbar sits flush */
+            padding-top: var(--nav-height); /* leave space for fixed navbar */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        /* Navigation bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: var(--nav-height);
+            background: var(--nav-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            backdrop-filter: blur(6px);
+        }
+
+        .nav-container {
+            width: 100%;
+            max-width: 1100px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 1rem;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .nav-logo svg { width: 36px; height: 36px; display: block; }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-home {
+            background: linear-gradient(90deg,var(--accent),#6be7e9);
+            color: #052525;
+            padding: 0.5rem 0.9rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: transform .12s ease, box-shadow .12s ease;
+        }
+
+        .btn-home:hover{ transform: translateY(-2px); box-shadow: 0 8px 18px rgba(0,0,0,0.25); }
+
+        .container {
+            border-radius: 8px;
+            background: linear-gradient(to bottom, #0c0c0c 60%, #1a1a1a 70%, transparent 100%),
+                        linear-gradient(to right, rgb(135, 89, 4) 30%, rgb(3, 96, 127) 60%);
+            background-size: 100% 100%, 100% 100%;
+            background-position: 0 0, bottom;
+            background-repeat: no-repeat;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 8rem;
+            max-width: 1100px; /* keep content aligned with navbar */
+            margin: 2rem; /* small breathing room */
+        }
+        h1 {
+            text-align: center;
+            color: #d3d1d1;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+          
+        }
+        label {
+            margin-top: 10px;
+            color: #c3bebe;
+        }
+        input {
+            padding: 8px;
+            margin-top: 5px;
+            background-color: #d2cdcd;
+            border: 1px solid #25252a; 
+            border-radius: 4px;
+        }
+        button { 
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #cecece;
+            color: rgb(0, 0, 0);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #d3a062;
+        }
+        input:hover {
+            background-color: #b8bcc4;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation bar: replace the inline SVG with an <img> if you prefer a raster logo. -->
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <a class="nav-logo" href="#" aria-label="Brand logo">
+                <!-- Inline SVG logo - swap with <img src="/path/to/logo.png"> to use an image file -->
+                <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                    <defs>
+                        <linearGradient id="g" x1="0" x2="1">
+                            <stop offset="0" stop-color="#00d4d6"/>
+                            <stop offset="1" stop-color="#6be7e9"/>
+                        </linearGradient>
+                    </defs>
+                    <rect width="64" height="64" rx="12" fill="url(#g)" />
+                    <path d="M20 40 L32 22 L44 40 Z" fill="#052525" opacity="0.95"/>
+                </svg>
+                <span>Net 9</span>
+            </a>
+
+            <div class="nav-actions">
+                <a class="btn-home" href="index.html" role="button" aria-label="Go to Home">Home</a>
+            </div>
+        </div>
+    </nav>
+
+    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"
+    onload="if(submitted) {window.location='thankyou.html';}"></iframe>
+    <div class="container">
+        <h1>Net 9 Daily Time Sheet</h1>
+        <form id="customerForm" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSdltpRU6jJiiNOP7H581xfg2kxGIVIW0Byx7GVgDJLTmdzmnw/formResponse" method="post" target="hidden_iframe" onsubmit="return validateForm();">
+         
+            <label for="date">Date:</label>
+            <input type="date" id="date"  required name="entry.1040645823">
+    
+            <label for="name">Name:</label>
+            <input type="text" id="name"  required name="entry.1727700238">
+    
+            <label for="recruiterName">Recruiter Name:</label>
+            <input type="text" id="recruiterName"  required name="entry.709387487">
+    
+            <label for="technology">Technology:</label>
+            <input type="text" id="technology"  required name="entry.598802544">
+
+            <label for="linkedinConnections">Linkedin Connections:</label>
+            <input type="text" id="linkedinConnections" required name="entry.71967954">
+
+            <label for="positionsSent">Positions Sent by Recruiter:</label>
+            <input type="number" id="positionsSent"  required name="entry.895107990">
+
+            <label for="mailsSent">No of mails Sent:</label>
+            <input type="number" id="mailsSent" required name="entry.1922782678">
+
+            <label for="linkedinJobs">Total jobs applied on Linkedin</label>
+            <input type="number" id="linkedinJobs" required name="entry.1394223527">
+
+            <label for="dice">Dice:</label>
+            <input type="number" id="dice" required name="entry.521637511">
+
+            <label for="monster">Monster:</label>
+            <input type="number" id="monster"  required name="entry.1241295387">
+
+            <label for="indeed">Indeed:</label>
+            <input type="number" id="indeed"  required name="entry.196570619">
+
+            <label for="glassdoor">Glassdoor:</label>
+            <input type="number" id="glassdoor"  required name="entry.244972317">
+
+            <label for="zipRecruiter">Zip Recruiter:</label>
+            <input type="number" id="zipRecruiter"  required name="entry.1388520893">
+
+            <label for="careerBuilder">Career Builder:</label>
+            <input type="number" id="careerBuilder"  required name="entry.1951275526">
+
+            <label for="callsAttended">Calls Attended:</label>
+            <input type="number" id="callsAttended"  required name="entry.172403682">
+
+            <label for="submissions">Submissions:</label>
+            <input type="number" id="submissions"  required name="entry.548963292">
+
+            <label for="interviewScheduled">Interview Scheduled:</label>
+            <input type="number" id="interviewScheduled"  required name="entry.1176979747">
+    
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <script>
+        function validateForm() {
+          
+            submitted=true;
+        }
+    </script>
+</body>
+</html>
